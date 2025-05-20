@@ -1,7 +1,7 @@
 from transformers import pipeline
 
-# Load high-quality summarization model
-summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+def summarize_texts(text_list):
+    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # ✅ load only when needed
 
 def summarize_texts(text_list):
     combined_text = "\n".join(text_list)
