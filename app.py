@@ -9,6 +9,8 @@ import tempfile
 from utils.file_handler import extract_zip_and_read_texts, read_pdf, read_docx
 from utils.text_cleaner import clean_text
 from utils.summarizer import summarize_texts  # ✅ model is inside this function now
+st.write("✅ App loaded.")
+
 
 st.set_page_config(page_title="AI Proposal Generator", layout="centered")
 st.title("📄 AI Proposal Generator")
