@@ -1,14 +1,16 @@
-# trigger rebuild
 import nltk
 nltk.download('punkt')
 
 import streamlit as st
+st.set_page_config(page_title="AI Proposal Generator", layout="centered")  # ✅ Must be first
+
 import os
 import zipfile
 import tempfile
 from utils.file_handler import extract_zip_and_read_texts, read_pdf, read_docx
 from utils.text_cleaner import clean_text
-from utils.summarizer import summarize_texts  # ✅ model is inside this function now
+from utils.summarizer import summarize_texts
+
 st.write("✅ App loaded.")
 
 
