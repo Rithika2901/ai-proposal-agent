@@ -1,20 +1,19 @@
 from transformers import pipeline
 
 def summarize_texts(text_list):
-    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")  # ✅ load only when needed
-
-def summarize_texts(text_list):
+    # ✅ Load model inside function to prevent Streamlit crash
+    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+    
     combined_text = "\n".join(text_list)
-    combined_text = combined_text[:4000]  # prevent crashes on long input
+    combined_text = combined_text[:4000]
 
     chunks = [combined_text[i:i+1000] for i in range(0, len(combined_text), 1000)]
     summary_parts = []
 
-    for chunk in chunks[:3]:  # up to 3 chunks
+    for chunk in chunks[:3]:
         output = summarizer(chunk, max_length=120, min_length=30, do_sample=False)
         summary_parts.append(output[0]['summary_text'])
 
-    # Format output
     proposal = "## Executive Summary\n"
     if len(summary_parts) > 0:
         proposal += summary_parts[0] + "\n\n"
@@ -26,4 +25,5 @@ def summarize_texts(text_list):
         proposal += summary_parts[2]
 
     return proposal
+
 
