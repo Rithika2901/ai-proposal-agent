@@ -2,21 +2,16 @@ import nltk
 nltk.download('punkt')
 
 import streamlit as st
-st.set_page_config(page_title="AI Proposal Generator", layout="centered")  # ✅ Must be first
+st.set_page_config(page_title="AI Proposal Generator", layout="centered")  # ✅ Must be the first Streamlit call
 
 import os
 import zipfile
 import tempfile
 from utils.file_handler import extract_zip_and_read_texts, read_pdf, read_docx
 from utils.text_cleaner import clean_text
-from utils.summarizer import summarize_texts
+from utils.summarizer import summarize_texts  # ✅ Uses internal pipeline safely
 
-st.write("✅ App loaded.")
-
-
-st.set_page_config(page_title="AI Proposal Generator", layout="centered")
 st.title("📄 AI Proposal Generator")
-
 st.write("Upload a **ZIP file** (multiple documents) or a single **PDF / DOCX / TXT** file. The AI will summarize and generate a professional draft.")
 
 uploaded_file = st.file_uploader("Upload file", type=["zip", "pdf", "docx", "txt"])
@@ -28,7 +23,7 @@ if uploaded_file:
         with open(file_path, "wb") as f:
             f.write(uploaded_file.read())
 
-        # Detect file type and read
+        # File handling logic
         if uploaded_file.name.endswith(".zip"):
             texts = extract_zip_and_read_texts(file_path, temp_dir)
         elif uploaded_file.name.endswith(".pdf"):
@@ -50,4 +45,3 @@ if uploaded_file:
             st.download_button("Download Summary", summary, file_name="summary.txt")
         else:
             st.warning("No meaningful content found to summarize.")
-
