@@ -6,6 +6,7 @@ import streamlit as st
 import os
 import zipfile
 import tempfile
+from transformers import pipeline
 from utils.file_handler import extract_zip_and_read_texts, read_pdf, read_docx
 from utils.text_cleaner import clean_text
 from utils.summarizer import summarize_texts  # ✅ Use this instead of pipeline
