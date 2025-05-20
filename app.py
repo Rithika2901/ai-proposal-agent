@@ -8,7 +8,7 @@ import zipfile
 import tempfile
 from utils.file_handler import extract_zip_and_read_texts, read_pdf, read_docx
 from utils.text_cleaner import clean_text
-from transformers import pipeline
+from utils.summarizer import summarize_texts  # ✅ Use this instead of pipeline
 
 # Initialize Hugging Face summarization pipeline
 summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
