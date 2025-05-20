@@ -4,4 +4,3 @@ PyMuPDF
 nltk
 transformers
 torch
-sumy
