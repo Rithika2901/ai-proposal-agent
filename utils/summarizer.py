@@ -1,9 +1,7 @@
 from transformers import pipeline
 
 def summarize_texts(text_list):
-    # ✅ Load model inside function to prevent Streamlit crash
     summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-    
     combined_text = "\n".join(text_list)
     combined_text = combined_text[:4000]
 
@@ -15,7 +13,7 @@ def summarize_texts(text_list):
         summary_parts.append(output[0]['summary_text'])
 
     proposal = "## Executive Summary\n"
-    if len(summary_parts) > 0:
+    if summary_parts:
         proposal += summary_parts[0] + "\n\n"
     if len(summary_parts) > 1:
         proposal += "## Key Findings\n"
@@ -25,5 +23,3 @@ def summarize_texts(text_list):
         proposal += summary_parts[2]
 
     return proposal
-
-
