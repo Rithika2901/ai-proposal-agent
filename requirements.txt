@@ -1,6 +1,6 @@
 streamlit
 python-docx
-PyMuPDF
+pymupdf
 nltk
 transformers
 torch
